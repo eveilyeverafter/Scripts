@@ -2,7 +2,7 @@
 # Type: 
 
 # If you want to rerun the digest:
-./00-FindREsites.sh
+./01-FindREsites.sh
 
 # From the output make the dataframe like 01-DataREsites.R. This is clunky but works. 
 

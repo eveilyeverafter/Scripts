@@ -1,4 +1,3 @@
-##################
 #!/bin/bash
 ls ../02-Cleaned/ > dirs
 

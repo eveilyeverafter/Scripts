@@ -30,6 +30,9 @@ for file in $(ls 00-RawData/Sample_*/*R1*); do echo $file;  tmp=$(zcat $file | w
 # Now clean the samples with seqyclean
 git clone https://github.com/ibest/GRC_Scripts.git 01-seqyclean # Pulls in seqyclean for github
 cd ./01-seqyclean
+perl -pi -e 's/\"preproc_report/\".\/preproc_report/g' preproc_experiment.R # Modifies script to play nice on some systems
+perl -pi -e 's/oflash\+5/oflash\+3/g' preproc_report # for specific version of flash
+perl -pi -e 's/oflash\+5/oflash\+4/g' preproc_report # for specific version of flash
 ./preproc_experiment.R -f "$SCRIPTS"/02-RecombinationRates/PAR/samples.txt -d ../00-RawData/ -q 10 -m 150 -p $PROCESSORS
 mv ./02* ../ # Move seqyclean output up to the parent directory
 cd ../

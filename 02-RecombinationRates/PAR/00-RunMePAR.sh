@@ -33,7 +33,8 @@ cd ./01-seqyclean
 perl -pi -e 's/\"preproc_report/\".\/preproc_report/g' preproc_experiment.R # Modifies script to play nice on some systems
 perl -pi -e 's/oflash\+5/oflash\+3/g' preproc_report # for specific version of flash
 perl -pi -e 's/oflash\+5/oflash\+4/g' preproc_report # for specific version of flash
-./preproc_experiment.R -f "$SCRIPTS"/02-RecombinationRates/PAR/samples.txt -d ../00-RawData/ -q 10 -m 150 -p $PROCESSORS
+chmod 777 *
+nohup ./preproc_experiment.R -f "$SCRIPTS"/02-RecombinationRates/PAR/samples.txt -d ../00-RawData/ -q 10 -m 150 -p $PROCESSORS &
 mv ./02* ../ # Move seqyclean output up to the parent directory
 cd ../
 
@@ -90,11 +91,8 @@ python "$SCRIPTS"/02-RecombinationRates/PAR/removeMultiBaseIndels.py # check fil
 # approximate number of snps after filter
 cat YPS128_DBVPG1106_nomultibaseindels_snps.txt | wc -l # 73581
 
-# Make a concise loci list that will be used later
+# Make a concise SNP list that will be used later
 cat YPS128_DBVPG1106_nomultibaseindels_snps.txt | sed 's/\s\s*/ /g' | cut -d' ' -f1-2 > locilist
-
-# Number of snps after filtering mtDNA and plasmid:
-# grep -c -e ^I -e ^X -e ^V locilist # 73294
 
 # Now That we have SNps, get the read counts of each parental allele for each of the samples
 cd ../

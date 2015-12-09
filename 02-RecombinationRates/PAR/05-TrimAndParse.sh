@@ -13,8 +13,8 @@
 	while read line
 		do
 		set 'echo $line'
-		../00-Scripts/ParseVCF2.pl "$line"_Yvar.trim.vcf > "$line"_Ycounts.txt &  
-		../00-Scripts/ParseVCF2.pl "$line"_Dvar.trim.vcf > "$line"_Dcounts 	 
+		"$SCRIPTS"/02-RecombinationRates/ParseVCF2.pl "$line"_Yvar.trim.vcf > "$line"_Ycounts.txt &  
+		"$SCRIPTS"/02-RecombinationRates/ParseVCF2.pl "$line"_Dvar.trim.vcf > "$line"_Dcounts 	 
 	done < ../samples
 	
 
